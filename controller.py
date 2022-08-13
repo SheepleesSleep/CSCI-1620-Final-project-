@@ -19,16 +19,32 @@ class Controller(QMainWindow, Ui_Area_Calculator):
     def calculate(self):
         match self.__shape:
             case 0:
-                self.label_info.setText("circle") 
+                try:
+                    ans = area.circle(float(self.input1.toPlainText()))
+                    self.label_info.setText(f"The area of the circle is {ans:.2f}")
+                except ValueError:
+                    self.label_info.setText("Please input a number greater than zero")
             case 1:
-                self.label_info.setText("square")
+                try:
+                    ans = area.square((float(self.input1.toPlainText())))
+                    self.label_info.setText(f"The area of the square is {ans:.2f}")
+                except ValueError:
+                    self.label_info.setText("Please input a number greater than zero")
             case 2:
-                self.label_info.setText("rectangle")
+                try:
+                    ans = area.rectangle(float(self.input1.toPlainText()),float(self.input2.toPlainText()))
+                    self.label_info.setText(f"The area of the rectangle is {ans:.2f}")
+                except ValueError:
+                    self.label_info.setText("Please input a number greater than zero")
             case 3:
-                self.label_info.setText("triangle")
+                try:
+                    ans = area.triangle(float(self.input1.toPlainText()),float(self.input2.toPlainText()))
+                    self.label_info.setText(f"The area of the triangle is {ans:.2f}")
+                except ValueError:
+                    self.label_info.setText("Please input a number greater than zero")
 
 
-    def circle_click(self):
+    def circle_click(self):   
         self.__shape = 0
         self.top_label.setEnabled(True)
         self.top_label.setText("Radius")
@@ -39,7 +55,7 @@ class Controller(QMainWindow, Ui_Area_Calculator):
         self.calc.setEnabled(True)
         self.calc.clicked.connect(self.calculate)
         
-    def square_click(self):
+    def square_click(self):  
         self.__shape = 1
         self.top_label.setEnabled(True)
         self.top_label.setText("Length")
@@ -50,7 +66,7 @@ class Controller(QMainWindow, Ui_Area_Calculator):
         self.calc.setEnabled(True)
         self.calc.clicked.connect(self.calculate)
            
-    def rectangle_click(self):
+    def rectangle_click(self):      
         self.__shape = 2
         self.top_label.setEnabled(True)
         self.top_label.setText("Length")
